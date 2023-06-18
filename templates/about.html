@@ -1,0 +1,543 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hospital Management System</title>
+    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body style="background-image:url(2.jpg)">
+    <nav class="navbar navbar-expand-md navbar-light navbar-dark" style="padding: 0;">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+        <img src="{% static 'logo.png' %}" alt="Logo" style="width:70px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar" style="justify-content: end;">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'about' %}">About</a>
+          </li>  
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'contact' %}">Contact</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'login_url' %}">Login</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link fontsize-change" href="{% url 'register_url' %}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+        </div> 
+      </div>
+       
+      </nav>
+
+      <div class="about-pg-style">
+        <div class="container" style="text-align: center;">
+          <div class="main-pg-heading">
+            <h1 class="text-center about-text">About Us</h1>
+          </div>
+          <div class="main-pg-text">
+            <h4>Find the right health provider to get treatment</h4>
+            <h4>Retrieve medical records, such as test results and other health information</h4>
+          </div>
+          <br>
+          <p></p>
+        </div>
+        <div class="main-pg-heading">
+          <h1 class="team-text" style="text-align:center">Our Team</h1>
+        </div>
+        
+          <!-- <div class="container">
+            <div class="card-deck">
+              <div class="card" style="width:400px">
+                <img class="card-img-top" src="../static/zain.jpeg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                  <h4 class="card-title">Zain</h4>
+                  <p class="card-text">CEO & Founder</p>
+                  <a href="#">ain@gmail.com</a><br>
+                  <button class="btn btn-primary">0304-6996579</button>
+                </div>
+              </div>
+              <div class="card" style="width:400px">
+                <img class="card-img-top" src="../static/hassan.jpeg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                  <h4 class="card-title">Hassan</h4>
+                  <p class="card-text">Web App Dev</p>
+                  <a href="#">hassan@gmail.com</a><br>
+                  <button class="btn btn-primary">0317-6996579</button>
+                </div>
+              </div>
+            </div>
+        </div> -->
+      
+        <div class="container-fluid">
+   
+          <section>             
+           <div class="col-sm-12 col-md-10 offset-md-1">
+             <div class="row">           
+       
+             <!-- Gallery Item Loop  -->
+       
+                <div onclick="changeActiveState(1)" class="col-md-6 col-lg-6 py-4" data-toggle="modal" data-target="#exampleModal">
+                 <div class="gallery-container">
+                 <img src="../static/hassan.jpeg" alt="Alt Name" class="image">
+       
+                    <div class="overlay">
+                     <p class="text p-2">
+                       <span>Hassan</span><br>
+                       <span class="small">Front End Dev</span>
+                       <button class="btn view-btn">VIEW</button>
+                     </p>                            
+                    </div>
+       
+                 </div>
+                </div> 
+       
+             <!--  End  -->
+                
+               
+                <div onclick="changeActiveState(2)" class="col-md-6 col-lg-6 py-4" data-toggle="modal" data-target="#exampleModal">
+                   <div class="gallery-container">
+                      <img src="../static/zain.jpeg" alt="Alt Name" class="image">
+       
+                      <div class="overlay">
+                         <p class="text p-2">
+                            <span>Zain</span><br>
+                            <span class="small">Back End Dev</span>
+                            <button class="btn view-btn">VIEW</button>
+                         </p>                            
+                      </div>
+       
+                   </div>
+                </div> 
+       
+                
+       
+           
+              <div>
+            </div>
+          </section>
+           
+       </div>
+       
+             
+       <!-- MODAL -->
+       <div class="modal fadeIn" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">   
+            
+         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+          <div class="carousel-inner">
+            
+            <!--  Item 1 Loop  -->
+            <div class="carousel-item active" id="carousel-1">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Gallery Title</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+       
+                <div class="modal-body">
+                   <img src="https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg" id="currentImg-1" Title="" alt="Alt Name" class="image">
+                </div>
+                
+                <div class="modal-thumbs px-3 py-3">
+                   <label>Gallery Images</label>
+                   <ul>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg','Title',1);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery2.jpg','Title',1);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery2.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery3.jpg','Title',1);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery3.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg','Title',1);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                   </ul>
+                </div>              
+             </div>
+            </div>  
+            <!-- Item 1 End  -->
+              
+            <!--  Item 2 Loop  -->
+            <div class="carousel-item" id="carousel-2">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Gallery Title 2</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+       
+                <div class="modal-body">
+                   <img src="https://www.ravenshoegroup.com/concept/codepen/gallery2.jpg" id="currentImg-2" alt="Alt Name" class="image">
+                </div>
+                
+                <div class="modal-thumbs px-3 py-3">
+                   <label>Gallery Images</label>
+                   <ul>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery2.jpg','Title',2);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery2.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery3.jpg','Title',2);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery3.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                      <li class="px-1" onclick="showImage('https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg','Title',2);">
+                         <div class="border"><img src="https://www.ravenshoegroup.com/concept/codepen/gallery1.jpg" alt="Alt Name" class="image"></div>                  
+                      </li>
+                   </ul>
+                </div>              
+             </div>
+            </div>  
+            <!-- Item 2 End  -->
+             
+            
+           
+            
+          </div> 
+         </div><!-- Carousel End -->
+          
+       </div>   
+          
+       <!-- Prev Next Arrows -->
+       <a href="#carouselExampleFade" role="button" data-slide="prev" class="carousel-control-prev"><div class="arrow-left d-flex align-items-center text-center" href="#carouselExampleFade" role="button" data-slide="prev"><img src="https://www.ravenshoegroup.com/concept/codepen/arrow-left.png" width="20px" alt="Left Arrow"></div></a>
+       <a href="#carouselExampleFade" role="button" data-slide="prev" class="carousel-control-next"><div class="arrow-right d-flex align-items-center text-center" href="#carouselExampleFade" role="button" data-slide="next"><img src="https://www.ravenshoegroup.com/concept/codepen/arrow-right.png" width="20px" alt="Right Arrow"></div></a>
+       <!--  Arrows End   -->
+          
+       </div><!-- Modal End  -->
+       
+      </div>
+
+      <footer class=" text-dark text-center text-md-left">
+        <div class="container">
+          <div class="row pt-4">
+          <div class="col-sm-6 col-md-3 pb-4">
+            <h4 class="mb-4" style="color: black;">
+            Services
+            </h4>
+            <ul class="list-unstyled">
+            <li>
+              <a href="#" class="text-dark">Web design</a>
+            </li>
+            <li>
+              <a href="#" class="text-dark">Development</a>
+            </li>
+            <li>
+              <a href="#" class="text-dark">Hosting</a>
+            </li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3 pb-4">
+            <h4 class="mb-4" style="color: black;">
+            About
+            </h4>
+            <ul class="list-unstyled">
+            <li>
+              <a href="#" class="text-dark">Company</a>
+            </li>
+            <li>
+              <a href="#" class="text-dark">Team</a>
+            </li>
+            <li>
+              <a href="#" class="text-dark">Careers</a>
+            </li>
+            </ul>
+          </div>
+          <div class="col-md-6 pb-4">
+            <h4 class="mb-4" style="color: black;">
+            Web development tools
+            </h4>
+            <ul class="list-unstyled">
+            <li>
+              <a href="https://www.phpcrudgenerator.com/tutorials/how-to-create-a-bootstrap-crud-admin-dashboard" class="text-dark">How to create a Bootstrap Admin Dashboard in PHP</a>
+            </li>
+            <li>
+              <a href="https://www.phpformbuilder.pro/drag-n-drop-form-builder/index.html" class="text-dark">Drag &amp; drop form builder</a>
+            </li>
+            <li>
+              <a href="https://www.tinymce-bootstrap-plugin.com/" class="text-dark">Bootstrap plugin for TinyMce</a>
+            </li>
+            </ul>
+          </div>
+          </div>
+          <div class="col d-flex justify-content-center mb-4">
+          <a href="#" class="d-block px-3"><img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-facebook-m.png" alt="Facebook" /></a><a href="#" class="d-block px-3"><img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-twitter-m.png" alt="Twitter" /></a><a href="#" class="d-block px-3"><img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-instagram-m.png" alt="Instagram" /></a><a href="#" class="d-block px-3"><img src="https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-linkedin-m.png" alt="Linkedin" /></a>
+          </div>
+          <p class="text-center text-secondary border-top border-secondary py-4">
+         
+          </p>
+        </div>
+        </footer>
+</body>
+<script>
+  // Image Functions
+function showImage(imgPath, imgText, galleryId) { 
+  var curImage = document.getElementById('currentImg-' + galleryId);      
+  curImage.src = imgPath;
+  curImage.alt = imgText;
+  curImage.title = imgText;
+}
+
+function changeActiveState(value) { 
+  var el = document.getElementById('carousel-' + value);
+  var list = el.getElementsByTagName("img");
+  var curImage = document.getElementById('currentImg-' + value);      
+  curImage.src = list[1].src;
+  curImage.alt = list[1].alt;
+  curImage.title = list[1].alt;
+  var arr = document.getElementsByClassName('carousel-item');
+  for (var i = 0; i < arr.length; i++){
+      arr[i].classList.remove('active');  
+  }
+  el.classList.add('active');  
+}
+
+
+</script>
+<style>
+  *, *:before, *:after {
+    box-sizing: border-box;
+}
+.about-pg-style{
+  /* filter: blur(1px) brightness(.7) contrast(.7);  */
+  background-color: antiquewhite;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.team-text::after{
+	content: "";
+    display: block;
+	width: 7%;
+    height: 3px;
+    margin: 20px auto 0;
+    background: #F05F40;
+}
+.about-text::after{
+	content: "";
+    display: block;
+	width: 11%;
+    height: 3px;
+    margin: 20px auto 0;
+    background: #F05F40;
+}
+.fontsize-change{
+          font-size: 1.5vw;
+          margin: 10px;
+		  color: black !important;
+    }
+        .text-light{
+          color: rgba(255,255,255,.5) !important;
+        }
+.main-pg-heading{
+	color: black;
+	text-shadow: 0 0 9px white, 0 0 15px black;
+}
+.main-pg-text{
+  color: brown;
+  text-shadow: 0 0 35px #FF0000, 0 0 13px darkorange;
+}
+body {
+  font-family: 'bruno', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #f1f1f1;
+    /* background-image: url(./background.jpg); */
+    background-position: cover;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.bg-light {
+  background-color: #f1f1f1;
+}
+
+.gallery-container {
+  position: relative;
+  width: 100%;
+  border-width: 7px;
+  border-color: #ffffff;
+  border-style: solid;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 0.3s ease;
+}
+
+.gallery-container:hover .overlay {
+  height: 50px;
+}
+
+.text {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+  color: #414141;
+  font-weight: bold;
+}
+.text .small {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
+  line-height: 1.3em;
+  color: #999999;
+}
+.text .view-btn {
+  right: 10px;
+  top: 12px;
+  position: absolute;
+  color: #000000;
+  font-weight: 500;
+  border-width: 1px;
+  border-color: #e7e7e7;
+  border-style: solid;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
+}
+.text .view-btn:hover {
+  border-color: #333333;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: auto;
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 0rem;
+}
+
+.modal-thumbs {
+  min-height: 150px;
+}
+.modal-thumbs label {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+  font-weight: 700;
+  color: #333333;
+  padding-left: 5px;
+}
+.modal-thumbs ul {
+  padding: 0;
+}
+.modal-thumbs ul li {
+  list-style: none;
+  width: 25%;
+  float: left;
+}
+@media (max-width: 768px) {
+  .modal-thumbs ul li {
+    width: 50%;
+  }
+}
+.modal-thumbs ul li .border {
+  display: inline-block;
+  position: relative;
+}
+.modal-thumbs ul li .border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.1s ease;
+  cursor: pointer;
+}
+.modal-thumbs ul li .border:hover::after {
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.modal-thumbs ul li img {
+  display: block;
+  position: relative;
+}
+
+.arrow-left {
+  float: left;
+  left: 0px;
+  padding: 50px;
+  position: fixed;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .arrow-left {
+    display: none !important;
+  }
+}
+.arrow-left:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.carousel-inner {
+  float: left;
+}
+
+.arrow-right {
+  float: left;
+  right: 0px;
+  padding: 50px;
+  position: fixed;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .arrow-right {
+    display: none !important;
+  }
+}
+.arrow-right:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+</style>

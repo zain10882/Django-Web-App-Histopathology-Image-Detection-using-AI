@@ -1,0 +1,231 @@
+{% load static %}
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>Hospital Management System</title>
+<!-- <link href="Cstyle.css" rel="stylesheet" type="text/css"> -->
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-light navbar-dark" style="padding: 0;">
+		<div class="container">
+		  <a class="navbar-brand" href="#">
+			<img src="{% static 'logo.png' %}" alt="Logo" style="width:70px">
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="collapsibleNavbar" style="justify-content: end;">
+			<ul class="navbar-nav">
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'index' %}">Home</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'about' %}">About</a>
+			  </li>  
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'contact' %}">Contact</a>
+			  </li>
+			  {% if user.is_authenticated %}
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'logout' %}">Logout</a>
+			  </li>
+			  {% else %}
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'login_url' %}">Login</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link fontsize-change" href="{% url 'register_url' %}">Register</a>
+			  </li>
+			  {% endif %}
+			</ul>
+		  </div> 
+		</div>
+		 
+	  </nav>
+<!-- <main>
+	<br><br>
+<div class="contact-in">
+			<div class="contact-map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53151.52345645618!2d73.00158987687654!3d33.63204741476856!2m3!1f0!2f0!3f0!3m2!1i102434567890345678!2i768!4f13.1!3m3!1m2!1s0x38df9570806ed9ed%3A0x894fbeb9e70954d4!2sAllama%20Iqbal%%20University!5e0!3m2!1sen!2s!4v1620047227703!5m2!1sen!2s" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>			</div>
+			<div class="contact-form">
+
+<center>
+<div class="container">
+  <div style="text-align:center">
+  <BR>
+  <BR>
+    <h1>Contact Us</h1>
+    <p>Please leave us a message:</p>
+  </div>
+  <div class="row">
+    <div class="column">
+      
+    </div>
+    <div class="column">
+      <form action="/action_page.php">
+        <h3><label for="fname">First Name</label><h3>
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+		<br>
+		<br>
+		<br>
+        <h3><label for="lname">Last Name</label><h3>
+		
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+		<br>
+		<br>
+		<br>
+        <label for="country">Country</label>
+        
+		<select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+		<br>
+	
+		<br>
+        <label for="subject">Subject</label>
+		<br>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"  style="width:100px"></textarea>
+        <br>
+		
+		<br>
+		<input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</div> -->
+<div class="container-fluid p-0 m-0">
+	<div class="row no-gutters" >
+	<div class="col-12">
+	<div class="position-absolute p-3 bg-white m-3 shadow-lg map-box2">
+		<div class="contact-pg-heading">
+			<h3 class="text-center"><strong>Contact Us</strong></h3>
+		</div>
+		<div class="contact-pg-text">
+			<h4 class="text-center">by leaving a message</h4>
+		</div>
+	<div class=" mt-4">
+	  <form action="/action_page.php">
+		<div class="row mb-2">
+			<div class="col">
+				<label for="input1">First Name</label>
+				<input type="text" class="form-control" id="input1" placeholder="first name">
+			</div>
+			<div class="col">
+				<label for="input1">Last Name</label>
+				<input type="text" class="form-control" id="input2" placeholder="last name">
+			</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col">
+				<label for="country">Select Country</label>
+				<select class="form-control" id="country" name="country">
+				  <option>Pakistan</option>
+				  <option>India</option>
+				  <option>China</option>
+				  <option>Ameraica</option>
+				</select>
+			</div>
+		</div>
+		<label for="subject">Subject</label>
+  		<textarea class="form-control mb-2" rows="5" id="subject"></textarea>
+		<a href="" class="btn btn-outline-danger btn-lg w-100 d-block">Send Message</a>
+	  </form>
+	  
+	</div>
+	</div>
+	<div class="embed-responsive embed-responsive-16by9 " style="height:550px !important;">
+	
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.6378599834447!2d73.04900257545404!3d33.66654417330459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df9570806ed9ed%3A0x894fbeb9e70954d4!2sNational%20University%20Of%20Modern%20Languages!5e0!3m2!1sen!2s!4v1683402297236!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>	
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+
+<style>
+  *, *:before, *:after {
+box-sizing: border-box;
+}
+
+body {
+	font-family: 'bruno', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+padding:0;
+margin: 0;
+overflow-x:hidden;
+background-color:#f1f1f1;
+}
+.shadow-lg{
+	background-color: bisque !important;
+}
+.contact-pg-heading{
+	color: aquamarine;
+	text-shadow: 0 0 13px red, 0 0 12px red;
+    letter-spacing: 3.1px;
+
+	
+}
+.contact-pg-text{
+	text-shadow: 0 0 23px #FF0000, 0 0 25px darkorange;
+	/* text-shadow: 0px 0px 35px darkorange; */
+	
+}
+h3::after{
+	content: "";
+    display: block;
+	width: 30%;
+    height: 3px;
+    margin: 3px auto 0;
+    background: #F05F40;
+}
+.fontsize-change{
+          font-size: 1.5vw;
+          margin: 10px;
+		  color: black !important;
+        }
+		input:focus, textarea:focus, keygen:focus, select:focus {
+	outline: none;
+}
+
+
+.btn {
+	padding: 14px 26px;
+	font-weight: 700;
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+.btn-danger {
+	background-color: #e34c43;
+	border-color: #e34c43;
+}
+#gmap_canvas
+{
+    filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="g"><feColorMatrix type="matrix" values="0.3 0.3 0.3 0 0 0.3 0.3 0.3 0 0 0.3 0.3 0.3 0 0 0 0 0 1 0"/></filter></svg>#g');
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%);    
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayScale=1);
+}
+.map-box2{
+z-index:9999; right:60px; width:360px;	
+}
+
+</style>
